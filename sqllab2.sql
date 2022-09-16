@@ -12,13 +12,12 @@ SELECT COUNT(rental_id)
   FROM rental;
 
 --    What are the shortest and longest movie duration? Name the values max_duration and min_duration.
-SELECT MAX(length) AS max_duration FROM film;
-SELECT MIN(length) AS min_duration FROM film;
+SELECT MAX(length) AS max_duration, MIN(length) AS min_duration FROM film;
 
 --    What's the average movie duration expressed in format (hours, minutes)?
-SELECT AVG(length) FROM film;
+SELECT SEC_TO_TIME(ROUND(AVG(length),0)*60) FROM film;
+
 -- 115 minutes, so that is one hour and 55 minutes.
--- TODO: make this into a simpler function?
 
 --    How many distinct (different) actors' last names are there?
 SELECT DISTINCT COUNT(last_name) FROM actor;
