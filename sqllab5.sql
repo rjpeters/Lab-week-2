@@ -89,10 +89,9 @@ JOIN film_actor b
 JOIN actor aa
 	ON a.actor_id = aa.actor_id
 JOIN actor ab
-	ON b.actor_id = ab.actor_id
-WHERE NOT EXISTS (SELECT * FROM table t2 WHERE t2.u = t1.v AND t2.v = t1.u AND t1.u > t2.u);
+	ON b.actor_id = ab.actor_id;
 -- TODO: weed out the extra duplicates (for each duo a,b this code returns both a,b and b,a)
--- This feels like something that would require a     
+
     
 --    Get all pairs of customers that have rented the same film more than 3 times.
 
