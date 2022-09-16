@@ -81,17 +81,17 @@ AND s.store_id = '1';
 
 
 --    Get all pairs of actors that worked together.
-SELECT  CONCAT(aa.first_name, ' ', aa.last_name) AS Actor1, 
+SELECT CONCAT(aa.first_name, ' ', aa.last_name) AS Actor1, 
 		CONCAT(ab.first_name, ' ', ab.last_name) AS Actor2 FROM film_actor a
 JOIN film_actor b
 	ON a.actor_id <> b.actor_id 
     AND a.film_id = b.film_id
+    AND a.actor_id > b.actor_id
 JOIN actor aa
 	ON a.actor_id = aa.actor_id
 JOIN actor ab
 	ON b.actor_id = ab.actor_id;
--- TODO: weed out the extra duplicates (for each duo a,b this code returns both a,b and b,a)
-
+    
     
 --    Get all pairs of customers that have rented the same film more than 3 times.
 
@@ -102,13 +102,12 @@ SELECT
 	FROM rental a
 JOIN rental b
 	ON a.customer_id <> b.customer_id
+    AND a.customer_id > b.customer_id
 	AND a.inventory_id = b.inventory_id
 GROUP BY a.customer_id, b.customer_id
 HAVING counter > 3;
 
--- TODO: weed out the duplicate duos (as above)
--- TODO: make this return the customer names rather than the customer ID.
-
+-- POTENTIAL TODO: make this return the customer names rather than the customer ID.
 
 
 --    For each film, list actor that has acted in more films.
